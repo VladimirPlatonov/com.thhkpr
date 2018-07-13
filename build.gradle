@@ -1,0 +1,95 @@
+group 'com.thhkpr'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    runtime group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+
+    compile 'org.jooq:jooq:3.11.2'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    compile group: 'com.google.re2j', name: 're2j', version: '1.2'
+
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+
+    // https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api
+    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile 'junit:junit:4.11'
+
+}
+
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'org.jooq:jooq-codegen:3.11.2'
+        classpath 'mysql:mysql-connector-java:8.0.11'
+    }
+}
+
+
+
+def writer = new StringWriter()
+def xml = new groovy.xml.MarkupBuilder(writer)
+        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.11.0.xsd') {
+    jdbc() {
+        driver('com.mysql.cj.jdbc.Driver')
+        url('jdbc:mysql://localhost:3306/thhkpr?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC')
+        user('root')
+        password('root')
+        schema ('thhkpr')
+    }
+    generator() {
+        database() {
+        }
+
+        // Watch out for this caveat when using MarkupBuilder with "reserved names"
+        // - https://github.com/jOOQ/jOOQ/issues/4797
+        // - http://stackoverflow.com/a/11389034/521799
+        // - https://groups.google.com/forum/#!topic/jooq-user/wi4S9rRxk4A
+        generate([:]) {
+            pojos true
+            daos true
+            jpaAnnotations  true
+            jpaVersion  '2.1'
+            validationAnnotations true
+            springAnnotations true
+
+        }
+        target() {
+            packageName('com.thhkpr.db')
+            directory('src/main/java')
+        }
+    }
+}
+
+// Run the code generator
+// ----------------------
+org.jooq.codegen.GenerationTool.generate(
+        javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.meta.jaxb.Configuration.class)
+)
