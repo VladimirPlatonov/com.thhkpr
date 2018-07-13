@@ -67,6 +67,7 @@ public class Main {
 
             System.out.println("like Ivanov's updates USERS records:");
             for (Record r : fetchIvanovsUsers) {
+                r.set(USERS.USER_ACTIVE,0);
                 //r.intoResultSet().updateInt(USERS.USER_ACTIVE,0);//
                 // r.set(USERS.USER_ACTIVE,0);
             }
