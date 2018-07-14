@@ -1,3 +1,4 @@
+package com.thhkpr;
 
 public class Greeting {
 
