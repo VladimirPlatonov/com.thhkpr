@@ -14,7 +14,16 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
+
+
+bootJar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+}
+
+
 sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenLocal()
@@ -24,17 +33,21 @@ repositories {
 dependencies {
     runtime group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
 
-    compile 'org.jooq:jooq:3.11.2'
+    compile group: 'org.jooq', name: 'jooq', version: '3.11.3'
+    compile group: 'org.jooq', name: 'jooq-codegen-maven', version: '3.11.3'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-    compile group: 'com.google.re2j', name: 're2j', version: '1.2'
+    //compile group: 'com.google.re2j', name: 're2j', version: '1.2'
+    //compile group: 'org.hibernate', name: 'hibernate-core', version: '5.3.2.Final'
+    //compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.3.2.Final'//
+    compile group: 'org.projectlombok', name: 'lombok-maven-plugin', version: '1.18.0.0'
+    //compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
+    //compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.0.8.RELEASE'
+    compile 'org.springframework.boot:spring-boot-starter-jooq'
+    //compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    //compile 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-    compile("org.springframework.boot:spring-boot-starter-web")
-
-
-    // https://mvnrepository.com/artifact/org.hibernate.javax.persistence/hibernate-jpa-2.1-api
-    compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.2.Final'
-
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'junit:junit:4.11'
 
 }
@@ -47,12 +60,10 @@ buildscript {
     }
 
     dependencies {
-        classpath 'org.jooq:jooq-codegen:3.11.2'
+        classpath 'org.jooq:jooq-codegen:3.11.3'
         classpath 'mysql:mysql-connector-java:8.0.11'
     }
 }
-
-
 
 def writer = new StringWriter()
 def xml = new groovy.xml.MarkupBuilder(writer)
@@ -62,10 +73,17 @@ def xml = new groovy.xml.MarkupBuilder(writer)
         url('jdbc:mysql://localhost:3306/thhkpr?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC')
         user('root')
         password('root')
-        schema ('thhkpr')
+        //schema ('thhkpr')
     }
     generator() {
+
+        name  'org.jooq.codegen.DefaultGenerator'
+        strategy {
+            name  'org.jooq.codegen.DefaultGeneratorStrategy'
+        }
+
         database() {
+            inputSchema  'thhkpr'
         }
 
         // Watch out for this caveat when using MarkupBuilder with "reserved names"
@@ -75,18 +93,19 @@ def xml = new groovy.xml.MarkupBuilder(writer)
         generate([:]) {
             pojos true
             daos true
-            jpaAnnotations  true
-            jpaVersion  '2.1'
-            validationAnnotations true
-            springAnnotations true
+            //jpaAnnotations  true
+            //jpaVersion  '2.1'
+            //validationAnnotations true
+            //springAnnotations true
 
         }
         target() {
-            packageName('com.thhkpr.db')
+            packageName('com.thhkpr.databases')
             directory('src/main/java')
         }
     }
 }
+
 
 // Run the code generator
 // ----------------------
