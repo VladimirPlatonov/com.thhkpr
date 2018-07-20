@@ -31,7 +31,7 @@ import org.jooq.types.ULong;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class ThingsRecord extends UpdatableRecordImpl<ThingsRecord> implements Record7<ULong, String, String, byte[], Timestamp, Timestamp, String> {
 
-    private static final long serialVersionUID = -1994993850;
+    private static final long serialVersionUID = -272388258;
 
     /**
      * Setter for <code>thhkpr.things.thing_id</code>.
@@ -76,16 +76,16 @@ public class ThingsRecord extends UpdatableRecordImpl<ThingsRecord> implements R
     }
 
     /**
-     * Setter for <code>thhkpr.things.thnig_voice</code>.
+     * Setter for <code>thhkpr.things.thing_voice</code>.
      */
-    public void setThnigVoice(byte... value) {
+    public void setThingVoice(byte... value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>thhkpr.things.thnig_voice</code>.
+     * Getter for <code>thhkpr.things.thing_voice</code>.
      */
-    public byte[] getThnigVoice() {
+    public byte[] getThingVoice() {
         return (byte[]) get(3);
     }
 
@@ -192,7 +192,7 @@ public class ThingsRecord extends UpdatableRecordImpl<ThingsRecord> implements R
      */
     @Override
     public Field<byte[]> field4() {
-        return Things.THINGS.THNIG_VOICE;
+        return Things.THINGS.THING_VOICE;
     }
 
     /**
@@ -248,7 +248,7 @@ public class ThingsRecord extends UpdatableRecordImpl<ThingsRecord> implements R
      */
     @Override
     public byte[] component4() {
-        return getThnigVoice();
+        return getThingVoice();
     }
 
     /**
@@ -304,7 +304,7 @@ public class ThingsRecord extends UpdatableRecordImpl<ThingsRecord> implements R
      */
     @Override
     public byte[] value4() {
-        return getThnigVoice();
+        return getThingVoice();
     }
 
     /**
@@ -363,7 +363,7 @@ public class ThingsRecord extends UpdatableRecordImpl<ThingsRecord> implements R
      */
     @Override
     public ThingsRecord value4(byte... value) {
-        setThnigVoice(value);
+        setThingVoice(value);
         return this;
     }
 
@@ -423,13 +423,13 @@ public class ThingsRecord extends UpdatableRecordImpl<ThingsRecord> implements R
     /**
      * Create a detached, initialised ThingsRecord
      */
-    public ThingsRecord(ULong thingId, String thingName, String thingDescribe, byte[] thnigVoice, Timestamp sysDateCreate, Timestamp sysDateUpdate, String sysWhoUpdateName) {
+    public ThingsRecord(ULong thingId, String thingName, String thingDescribe, byte[] thingVoice, Timestamp sysDateCreate, Timestamp sysDateUpdate, String sysWhoUpdateName) {
         super(Things.THINGS);
 
         set(0, thingId);
         set(1, thingName);
         set(2, thingDescribe);
-        set(3, thnigVoice);
+        set(3, thingVoice);
         set(4, sysDateCreate);
         set(5, sysDateUpdate);
         set(6, sysWhoUpdateName);

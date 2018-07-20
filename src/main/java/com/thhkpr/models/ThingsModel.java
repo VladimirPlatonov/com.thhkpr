@@ -17,7 +17,7 @@ public class ThingsModel
     private ULong thingId;
     private String    thingName;
     private String    thingDescribe;
-    private byte[]    thnigVoice;
+    private byte[]    thingVoice;
     private Timestamp sysDateCreate;
     private Timestamp sysDateUpdate;
     private String    sysWhoUpdateName;

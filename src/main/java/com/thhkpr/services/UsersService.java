@@ -15,10 +15,14 @@ public class UsersService
 	@Autowired
 	private UsersRepository usersRepository;
 
+	public Boolean putThing() {
+	    return true;
+    }
+
 	public Users save(UsersModel usersModel)
 	{
 		ULong id = usersRepository.insert(usersModel);
-		
+
 		return getOneById(id);
 	}
 	

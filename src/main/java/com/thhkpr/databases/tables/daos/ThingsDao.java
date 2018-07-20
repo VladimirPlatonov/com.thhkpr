@@ -81,10 +81,10 @@ public class ThingsDao extends DAOImpl<ThingsRecord, com.thhkpr.databases.tables
     }
 
     /**
-     * Fetch records that have <code>thnig_voice IN (values)</code>
+     * Fetch records that have <code>thing_voice IN (values)</code>
      */
-    public List<com.thhkpr.databases.tables.pojos.Things> fetchByThnigVoice(byte[]... values) {
-        return fetch(Things.THINGS.THNIG_VOICE, values);
+    public List<com.thhkpr.databases.tables.pojos.Things> fetchByThingVoice(byte[]... values) {
+        return fetch(Things.THINGS.THING_VOICE, values);
     }
 
     /**

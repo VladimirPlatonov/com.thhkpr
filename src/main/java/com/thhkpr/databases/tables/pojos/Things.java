@@ -25,12 +25,12 @@ import org.jooq.types.ULong;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Things implements Serializable {
 
-    private static final long serialVersionUID = 1409177372;
+    private static final long serialVersionUID = 426372912;
 
     private ULong     thingId;
     private String    thingName;
     private String    thingDescribe;
-    private byte[]    thnigVoice;
+    private byte[]    thingVoice;
     private Timestamp sysDateCreate;
     private Timestamp sysDateUpdate;
     private String    sysWhoUpdateName;
@@ -41,7 +41,7 @@ public class Things implements Serializable {
         this.thingId = value.thingId;
         this.thingName = value.thingName;
         this.thingDescribe = value.thingDescribe;
-        this.thnigVoice = value.thnigVoice;
+        this.thingVoice = value.thingVoice;
         this.sysDateCreate = value.sysDateCreate;
         this.sysDateUpdate = value.sysDateUpdate;
         this.sysWhoUpdateName = value.sysWhoUpdateName;
@@ -51,7 +51,7 @@ public class Things implements Serializable {
         ULong     thingId,
         String    thingName,
         String    thingDescribe,
-        byte[]    thnigVoice,
+        byte[]    thingVoice,
         Timestamp sysDateCreate,
         Timestamp sysDateUpdate,
         String    sysWhoUpdateName
@@ -59,7 +59,7 @@ public class Things implements Serializable {
         this.thingId = thingId;
         this.thingName = thingName;
         this.thingDescribe = thingDescribe;
-        this.thnigVoice = thnigVoice;
+        this.thingVoice = thingVoice;
         this.sysDateCreate = sysDateCreate;
         this.sysDateUpdate = sysDateUpdate;
         this.sysWhoUpdateName = sysWhoUpdateName;
@@ -89,12 +89,12 @@ public class Things implements Serializable {
         this.thingDescribe = thingDescribe;
     }
 
-    public byte[] getThnigVoice() {
-        return this.thnigVoice;
+    public byte[] getThingVoice() {
+        return this.thingVoice;
     }
 
-    public void setThnigVoice(byte... thnigVoice) {
-        this.thnigVoice = thnigVoice;
+    public void setThingVoice(byte... thingVoice) {
+        this.thingVoice = thingVoice;
     }
 
     public Timestamp getSysDateCreate() {

@@ -43,7 +43,7 @@ import org.jooq.types.ULong;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Things extends TableImpl<ThingsRecord> {
 
-    private static final long serialVersionUID = 187536688;
+    private static final long serialVersionUID = -76316090;
 
     /**
      * The reference instance of <code>thhkpr.things</code>
@@ -74,9 +74,9 @@ public class Things extends TableImpl<ThingsRecord> {
     public final TableField<ThingsRecord, String> THING_DESCRIBE = createField("thing_describe", org.jooq.impl.SQLDataType.VARCHAR(4000), this, "");
 
     /**
-     * The column <code>thhkpr.things.thnig_voice</code>.
+     * The column <code>thhkpr.things.thing_voice</code>.
      */
-    public final TableField<ThingsRecord, byte[]> THNIG_VOICE = createField("thnig_voice", org.jooq.impl.SQLDataType.BLOB, this, "");
+    public final TableField<ThingsRecord, byte[]> THING_VOICE = createField("thing_voice", org.jooq.impl.SQLDataType.BLOB, this, "");
 
     /**
      * The column <code>thhkpr.things.sys_date_create</code>.
