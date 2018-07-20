@@ -1,8 +1,8 @@
 package com.thhkpr.repositories;
 
-import com.thhkpr.databases.tables.Users;
-import com.thhkpr.databases.tables.records.UsersRecord;
-import com.thhkpr.models.UsersModel;
+import com.thhkpr.databases.tables.Storage;
+import com.thhkpr.databases.tables.records.StorageRecord;
+import com.thhkpr.models.StorageModel;
 import org.jooq.DSLContext;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,52 +15,55 @@ import java.util.List;
 @Repository
 public class StorageRepository
 {
-	Users users = Users.USERS;
+	Storage storage = Storage.STORAGE;
 	
 	@Autowired
 	private DSLContext dsl;
 
 
-	public ULong insert(UsersModel usersModel)
+	public ULong insert(StorageModel storageModel)
     {
-		UsersRecord usersRecord = dsl.insertInto(users, users.USER_NAME, users.USER_LOGIN, users.USER_PASSWORD, users.USER_ACTIVE)
-				.values(usersModel.getUserName(), usersModel.getUserLogin(), usersModel.getUserPassword(), 1)
-				.returning(users.USER_ID)
+		StorageRecord storageRecord = dsl.insertInto(
+					storage,
+					storage.STORAGE_NAME,
+					storage.STORAGE_DESCRIBE,
+					storage.STORAGE_PLACE)
+				.values(
+						storageModel.getStorageName(),
+						storageModel.getStorageDescribe(),
+						storageModel.getStoragePlace())
+				.returning(storage.STORAGE_ID)
 				.fetchOne();
-		return usersRecord.getValue(users.USER_ID);
+		return storageRecord.getValue(storage.STORAGE_ID);
 	}
 	
-	public boolean update(UsersModel usersModel)
+	public boolean update(StorageModel storageModel)
     {
-		return dsl.update(users)
-				.set(users.USER_NAME, usersModel.getUserName())
-                .set(users.USER_LOGIN, usersModel.getUserLogin())
-                .set(users.USER_PASSWORD, usersModel.getUserPassword())
-                //.set(users.USER_ACTIVE, usersModel.getUserActive())
-				.where(users.USER_ID.equal(usersModel.getUserId())
-                  .and(users.USER_ACTIVE.eq(1)))
+		return dsl.update(storage)
+				.set(storage.STORAGE_NAME, storageModel.getStorageName())
+                .set(storage.STORAGE_DESCRIBE, storageModel.getStorageDescribe())
+                .set(storage.STORAGE_PLACE, storageModel.getStoragePlace())
+				.where(storage.STORAGE_ID.equal(storageModel.getStorageId()))
 				.execute() == 1;
 	}
 
 	public boolean delete(ULong id)
 	{
-		return dsl.deleteFrom(users)
-				.where(users.USER_ID.eq(id))
+		return dsl.deleteFrom(storage)
+				.where(storage.STORAGE_ID.eq(id))
 				.execute() == 1;
 	}
 	
 	public List<com.thhkpr.databases.tables.pojos.Users> selectAll()
 	{
-		return dsl.selectFrom(users)
-                .where(users.USER_ACTIVE.eq(1)) //+
+		return dsl.selectFrom(storage)
                 .fetchInto(com.thhkpr.databases.tables.pojos.Users.class);
 	}
 	
 	public com.thhkpr.databases.tables.pojos.Users selectOneById(ULong id)
 	{
-		return dsl.selectFrom(users)
-				.where(users.USER_ID.eq(id)
-				.and(users.USER_ACTIVE.eq(1)))
+		return dsl.selectFrom(storage)
+				.where(storage.STORAGE_ID.eq(id))
 				.fetchOneInto(com.thhkpr.databases.tables.pojos.Users.class);
 	}
 }
