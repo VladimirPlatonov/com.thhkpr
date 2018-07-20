@@ -17,7 +17,7 @@ public class SettingsRepository
 {
 	Settings settings = Settings.SETTINGS;
 
-	private enum SettingParamName {CURRENT_SETTINGS_NAME,EMPTY};
+    enum SettingParamName {CURRENT_SETTINGS_NAME,EMPTY};
 	
 	@Autowired
 	private DSLContext dsl;
@@ -25,8 +25,13 @@ public class SettingsRepository
 
 	public ULong insert(SettingsModel settingsModel)
     {
-		SettingsRecord settingsRecord = dsl.insertInto(settings, settings.SETTINGS_NAME, settings.SETTINGS_LOGIN, settings.SETTINGS_PASSWORD, settings.SETTINGS_ACTIVE)
-				.values(settingsModel.getSettingsName(), settingsModel.getSettingsLogin(), settingsModel.getSettingsPassword(), 1)
+		SettingsRecord settingsRecord = dsl.insertInto(
+		            settings,
+                    settings.SETTINGS_NAME,
+                    settings.SETTINGS_VALUE)
+				.values(
+				        settingsModel.getSettingsName(),
+                        settingsModel.getSettingsValue())
 				.returning(settings.SETTINGS_ID)
 				.fetchOne();
 		return settingsRecord.getValue(settings.SETTINGS_ID);
@@ -36,11 +41,8 @@ public class SettingsRepository
     {
 		return dsl.update(settings)
 				.set(settings.SETTINGS_NAME, settingsModel.getSettingsName())
-                .set(settings.SETTINGS_LOGIN, settingsModel.getSettingsLogin())
-                .set(settings.SETTINGS_PASSWORD, settingsModel.getSettingsPassword())
-                //.set(settings.SETTINGS_ACTIVE, settingsModel.getSettingsActive())
-				.where(settings.SETTINGS_ID.equal(settingsModel.getSettingsId())
-                  .and(settings.SETTINGS_ACTIVE.eq(1)))
+                .set(settings.SETTINGS_VALUE, settingsModel.getSettingsValue())
+				.where(settings.SETTINGS_ID.equal(settingsModel.getSettingsId()))
 				.execute() == 1;
 	}
 
@@ -51,18 +53,16 @@ public class SettingsRepository
 				.execute() == 1;
 	}
 	
-	public List<com.thhkpr.databases.tables.pojos.Users> selectAll()
+	public List<com.thhkpr.databases.tables.pojos.Settings> selectAll()
 	{
 		return dsl.selectFrom(settings)
-                .where(settings.SETTINGS_ACTIVE.eq(1)) //+
-                .fetchInto(com.thhkpr.databases.tables.pojos.Users.class);
+                .fetchInto(com.thhkpr.databases.tables.pojos.Settings.class);
 	}
 	
-	public com.thhkpr.databases.tables.pojos.Users selectOneById(ULong id)
+	public com.thhkpr.databases.tables.pojos.Settings selectOneById(String par)
 	{
 		return dsl.selectFrom(settings)
-				.where(settings.SETTINGS_ID.eq(id)
-				.and(settings.SETTINGS_ACTIVE.eq(1)))
-				.fetchOneInto(com.thhkpr.databases.tables.pojos.Users.class);
+				.where(settings.SETTINGS_NAME.equal(par))
+				.fetchOneInto(com.thhkpr.databases.tables.pojos.Settings.class);
 	}
 }

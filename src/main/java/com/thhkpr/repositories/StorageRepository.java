@@ -54,16 +54,16 @@ public class StorageRepository
 				.execute() == 1;
 	}
 	
-	public List<com.thhkpr.databases.tables.pojos.Users> selectAll()
+	public List<com.thhkpr.databases.tables.pojos.Storage> selectAll()
 	{
 		return dsl.selectFrom(storage)
-                .fetchInto(com.thhkpr.databases.tables.pojos.Users.class);
+                .fetchInto(com.thhkpr.databases.tables.pojos.Storage.class);
 	}
 	
-	public com.thhkpr.databases.tables.pojos.Users selectOneById(ULong id)
+	public com.thhkpr.databases.tables.pojos.Storage selectOneById(ULong id)
 	{
 		return dsl.selectFrom(storage)
 				.where(storage.STORAGE_ID.eq(id))
-				.fetchOneInto(com.thhkpr.databases.tables.pojos.Users.class);
+				.fetchOneInto(com.thhkpr.databases.tables.pojos.Storage.class);
 	}
 }
