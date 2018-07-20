@@ -1,8 +1,8 @@
 package com.thhkpr.repositories;
 
-import com.thhkpr.databases.tables.Users;
-import com.thhkpr.databases.tables.records.UsersRecord;
-import com.thhkpr.models.UsersModel;
+import com.thhkpr.databases.tables.Settings;
+import com.thhkpr.databases.tables.records.SettingsRecord;
+import com.thhkpr.models.SettingsModel;
 import org.jooq.DSLContext;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,54 +15,54 @@ import java.util.List;
 @Repository
 public class SettingsRepository
 {
-	Users users = Users.USERS;
+	Settings settings = Settings.SETTINGS;
 
-	private enum SettingParamName {CURRENT_USER_NAME,EMPTY};
+	private enum SettingParamName {CURRENT_SETTINGS_NAME,EMPTY};
 	
 	@Autowired
 	private DSLContext dsl;
 
 
-	public ULong insert(UsersModel usersModel)
+	public ULong insert(SettingsModel settingsModel)
     {
-		UsersRecord usersRecord = dsl.insertInto(users, users.USER_NAME, users.USER_LOGIN, users.USER_PASSWORD, users.USER_ACTIVE)
-				.values(usersModel.getUserName(), usersModel.getUserLogin(), usersModel.getUserPassword(), 1)
-				.returning(users.USER_ID)
+		SettingsRecord settingsRecord = dsl.insertInto(settings, settings.SETTINGS_NAME, settings.SETTINGS_LOGIN, settings.SETTINGS_PASSWORD, settings.SETTINGS_ACTIVE)
+				.values(settingsModel.getSettingsName(), settingsModel.getSettingsLogin(), settingsModel.getSettingsPassword(), 1)
+				.returning(settings.SETTINGS_ID)
 				.fetchOne();
-		return usersRecord.getValue(users.USER_ID);
+		return settingsRecord.getValue(settings.SETTINGS_ID);
 	}
 	
-	public boolean update(UsersModel usersModel)
+	public boolean update(SettingsModel settingsModel)
     {
-		return dsl.update(users)
-				.set(users.USER_NAME, usersModel.getUserName())
-                .set(users.USER_LOGIN, usersModel.getUserLogin())
-                .set(users.USER_PASSWORD, usersModel.getUserPassword())
-                //.set(users.USER_ACTIVE, usersModel.getUserActive())
-				.where(users.USER_ID.equal(usersModel.getUserId())
-                  .and(users.USER_ACTIVE.eq(1)))
+		return dsl.update(settings)
+				.set(settings.SETTINGS_NAME, settingsModel.getSettingsName())
+                .set(settings.SETTINGS_LOGIN, settingsModel.getSettingsLogin())
+                .set(settings.SETTINGS_PASSWORD, settingsModel.getSettingsPassword())
+                //.set(settings.SETTINGS_ACTIVE, settingsModel.getSettingsActive())
+				.where(settings.SETTINGS_ID.equal(settingsModel.getSettingsId())
+                  .and(settings.SETTINGS_ACTIVE.eq(1)))
 				.execute() == 1;
 	}
 
 	public boolean delete(ULong id)
 	{
-		return dsl.deleteFrom(users)
-				.where(users.USER_ID.eq(id))
+		return dsl.deleteFrom(settings)
+				.where(settings.SETTINGS_ID.eq(id))
 				.execute() == 1;
 	}
 	
 	public List<com.thhkpr.databases.tables.pojos.Users> selectAll()
 	{
-		return dsl.selectFrom(users)
-                .where(users.USER_ACTIVE.eq(1)) //+
+		return dsl.selectFrom(settings)
+                .where(settings.SETTINGS_ACTIVE.eq(1)) //+
                 .fetchInto(com.thhkpr.databases.tables.pojos.Users.class);
 	}
 	
 	public com.thhkpr.databases.tables.pojos.Users selectOneById(ULong id)
 	{
-		return dsl.selectFrom(users)
-				.where(users.USER_ID.eq(id)
-				.and(users.USER_ACTIVE.eq(1)))
+		return dsl.selectFrom(settings)
+				.where(settings.SETTINGS_ID.eq(id)
+				.and(settings.SETTINGS_ACTIVE.eq(1)))
 				.fetchOneInto(com.thhkpr.databases.tables.pojos.Users.class);
 	}
 }
