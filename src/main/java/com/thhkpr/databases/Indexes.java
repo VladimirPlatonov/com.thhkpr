@@ -43,6 +43,7 @@ public class Indexes {
     public static final Index STORAGE_STORAGE_PLACE_INDEX = Indexes0.STORAGE_STORAGE_PLACE_INDEX;
     public static final Index STORAGE_STORAGE_STORAGE_ID_INDEX = Indexes0.STORAGE_STORAGE_STORAGE_ID_INDEX;
     public static final Index THINGS_PRIMARY = Indexes0.THINGS_PRIMARY;
+    public static final Index THINGS_THINGS_STORAGE_ID_INDEX = Indexes0.THINGS_THINGS_STORAGE_ID_INDEX;
     public static final Index THINGS_THINGS_THING_ID_INDEX = Indexes0.THINGS_THINGS_THING_ID_INDEX;
     public static final Index THINGS_THINGS_THING_NAME_INDEX = Indexes0.THINGS_THINGS_THING_NAME_INDEX;
     public static final Index THINGS_THING_ID = Indexes0.THINGS_THING_ID;
@@ -66,6 +67,7 @@ public class Indexes {
         public static Index STORAGE_STORAGE_PLACE_INDEX = Internal.createIndex("storage_place_index", Storage.STORAGE, new OrderField[] { Storage.STORAGE.STORAGE_PLACE }, false);
         public static Index STORAGE_STORAGE_STORAGE_ID_INDEX = Internal.createIndex("storage_storage_id_index", Storage.STORAGE, new OrderField[] { Storage.STORAGE.STORAGE_ID }, false);
         public static Index THINGS_PRIMARY = Internal.createIndex("PRIMARY", Things.THINGS, new OrderField[] { Things.THINGS.THING_ID }, true);
+        public static Index THINGS_THINGS_STORAGE_ID_INDEX = Internal.createIndex("things_storage_id_index", Things.THINGS, new OrderField[] { Things.THINGS.STORAGE_ID }, false);
         public static Index THINGS_THINGS_THING_ID_INDEX = Internal.createIndex("things_thing_id_index", Things.THINGS, new OrderField[] { Things.THINGS.THING_ID }, false);
         public static Index THINGS_THINGS_THING_NAME_INDEX = Internal.createIndex("things_thing_name_index", Things.THINGS, new OrderField[] { Things.THINGS.THING_NAME }, false);
         public static Index THINGS_THING_ID = Internal.createIndex("thing_id", Things.THINGS, new OrderField[] { Things.THINGS.THING_ID }, true);

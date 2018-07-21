@@ -26,7 +26,6 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.ULong;
 
 
 /**
@@ -42,7 +41,7 @@ import org.jooq.types.ULong;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Settings extends TableImpl<SettingsRecord> {
 
-    private static final long serialVersionUID = -1526666586;
+    private static final long serialVersionUID = -1203549969;
 
     /**
      * The reference instance of <code>thhkpr.settings</code>
@@ -60,7 +59,7 @@ public class Settings extends TableImpl<SettingsRecord> {
     /**
      * The column <code>thhkpr.settings.settings_id</code>.
      */
-    public final TableField<SettingsRecord, ULong> SETTINGS_ID = createField("settings_id", org.jooq.impl.SQLDataType.BIGINTUNSIGNED.nullable(false).identity(true), this, "");
+    public final TableField<SettingsRecord, Integer> SETTINGS_ID = createField("settings_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>thhkpr.settings.settings_name</code>.
@@ -125,7 +124,7 @@ public class Settings extends TableImpl<SettingsRecord> {
      * {@inheritDoc}
      */
     @Override
-    public Identity<SettingsRecord, ULong> getIdentity() {
+    public Identity<SettingsRecord, Integer> getIdentity() {
         return Keys.IDENTITY_SETTINGS;
     }
 

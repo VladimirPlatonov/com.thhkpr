@@ -21,7 +21,7 @@ public class UsersRepository
 	private DSLContext dsl;
 
 
-	public ULong insert(UsersModel usersModel)
+	public Integer insert(UsersModel usersModel)
     {
 		UsersRecord usersRecord = dsl.insertInto(users, users.USER_NAME, users.USER_LOGIN, users.USER_PASSWORD, users.USER_ACTIVE)
 				.values(usersModel.getUserName(), usersModel.getUserLogin(), usersModel.getUserPassword(), 1)
@@ -42,7 +42,7 @@ public class UsersRepository
 				.execute() == 1;
 	}
 
-	public boolean delete(ULong id)
+	public boolean delete(Integer id)
 	{
 		return dsl.deleteFrom(users)
 				.where(users.USER_ID.eq(id))
@@ -56,7 +56,7 @@ public class UsersRepository
                 .fetchInto(com.thhkpr.databases.tables.pojos.Users.class);
 	}
 	
-	public com.thhkpr.databases.tables.pojos.Users selectOneById(ULong id)
+	public com.thhkpr.databases.tables.pojos.Users selectOneById(Integer id)
 	{
 		return dsl.selectFrom(users)
 				.where(users.USER_ID.eq(id)

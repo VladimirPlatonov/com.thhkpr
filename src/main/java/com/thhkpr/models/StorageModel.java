@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @Getter
 public class StorageModel
 {
-    private ULong     storageId;
+    private Integer   storageId;
     private String    storageName;
     private String    storageDescribe;
     private String    storagePlace;

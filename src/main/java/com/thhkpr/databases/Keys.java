@@ -18,7 +18,6 @@ import javax.annotation.Generated;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
-import org.jooq.types.ULong;
 
 
 /**
@@ -39,10 +38,10 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
-    public static final Identity<SettingsRecord, ULong> IDENTITY_SETTINGS = Identities0.IDENTITY_SETTINGS;
-    public static final Identity<StorageRecord, ULong> IDENTITY_STORAGE = Identities0.IDENTITY_STORAGE;
-    public static final Identity<ThingsRecord, ULong> IDENTITY_THINGS = Identities0.IDENTITY_THINGS;
-    public static final Identity<UsersRecord, ULong> IDENTITY_USERS = Identities0.IDENTITY_USERS;
+    public static final Identity<SettingsRecord, Integer> IDENTITY_SETTINGS = Identities0.IDENTITY_SETTINGS;
+    public static final Identity<StorageRecord, Integer> IDENTITY_STORAGE = Identities0.IDENTITY_STORAGE;
+    public static final Identity<ThingsRecord, Integer> IDENTITY_THINGS = Identities0.IDENTITY_THINGS;
+    public static final Identity<UsersRecord, Integer> IDENTITY_USERS = Identities0.IDENTITY_USERS;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
@@ -67,10 +66,10 @@ public class Keys {
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
-        public static Identity<SettingsRecord, ULong> IDENTITY_SETTINGS = Internal.createIdentity(Settings.SETTINGS, Settings.SETTINGS.SETTINGS_ID);
-        public static Identity<StorageRecord, ULong> IDENTITY_STORAGE = Internal.createIdentity(Storage.STORAGE, Storage.STORAGE.STORAGE_ID);
-        public static Identity<ThingsRecord, ULong> IDENTITY_THINGS = Internal.createIdentity(Things.THINGS, Things.THINGS.THING_ID);
-        public static Identity<UsersRecord, ULong> IDENTITY_USERS = Internal.createIdentity(Users.USERS, Users.USERS.USER_ID);
+        public static Identity<SettingsRecord, Integer> IDENTITY_SETTINGS = Internal.createIdentity(Settings.SETTINGS, Settings.SETTINGS.SETTINGS_ID);
+        public static Identity<StorageRecord, Integer> IDENTITY_STORAGE = Internal.createIdentity(Storage.STORAGE, Storage.STORAGE.STORAGE_ID);
+        public static Identity<ThingsRecord, Integer> IDENTITY_THINGS = Internal.createIdentity(Things.THINGS, Things.THINGS.THING_ID);
+        public static Identity<UsersRecord, Integer> IDENTITY_USERS = Internal.createIdentity(Users.USERS, Users.USERS.USER_ID);
     }
 
     private static class UniqueKeys0 {

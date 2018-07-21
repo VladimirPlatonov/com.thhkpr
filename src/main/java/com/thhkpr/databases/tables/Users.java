@@ -26,7 +26,6 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.ULong;
 
 
 /**
@@ -42,7 +41,7 @@ import org.jooq.types.ULong;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Users extends TableImpl<UsersRecord> {
 
-    private static final long serialVersionUID = -1312010667;
+    private static final long serialVersionUID = 1751716268;
 
     /**
      * The reference instance of <code>thhkpr.users</code>
@@ -60,7 +59,7 @@ public class Users extends TableImpl<UsersRecord> {
     /**
      * The column <code>thhkpr.users.user_id</code>.
      */
-    public final TableField<UsersRecord, ULong> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.BIGINTUNSIGNED.nullable(false).identity(true), this, "");
+    public final TableField<UsersRecord, Integer> USER_ID = createField("user_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>thhkpr.users.user_name</code>.
@@ -135,7 +134,7 @@ public class Users extends TableImpl<UsersRecord> {
      * {@inheritDoc}
      */
     @Override
-    public Identity<UsersRecord, ULong> getIdentity() {
+    public Identity<UsersRecord, Integer> getIdentity() {
         return Keys.IDENTITY_USERS;
     }
 

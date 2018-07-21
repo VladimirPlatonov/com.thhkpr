@@ -27,7 +27,6 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.ULong;
 
 
 /**
@@ -43,7 +42,7 @@ import org.jooq.types.ULong;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Storage extends TableImpl<StorageRecord> {
 
-    private static final long serialVersionUID = 1020098553;
+    private static final long serialVersionUID = 56498504;
 
     /**
      * The reference instance of <code>thhkpr.storage</code>
@@ -61,7 +60,7 @@ public class Storage extends TableImpl<StorageRecord> {
     /**
      * The column <code>thhkpr.storage.storage_id</code>.
      */
-    public final TableField<StorageRecord, ULong> STORAGE_ID = createField("storage_id", org.jooq.impl.SQLDataType.BIGINTUNSIGNED.nullable(false).identity(true), this, "");
+    public final TableField<StorageRecord, Integer> STORAGE_ID = createField("storage_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>thhkpr.storage.storage_name</code>.
@@ -146,7 +145,7 @@ public class Storage extends TableImpl<StorageRecord> {
      * {@inheritDoc}
      */
     @Override
-    public Identity<StorageRecord, ULong> getIdentity() {
+    public Identity<StorageRecord, Integer> getIdentity() {
         return Keys.IDENTITY_STORAGE;
     }
 

@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @Getter
 public class ThingsModel
 {
-    private ULong thingId;
+    private Integer   thingId;
     private String    thingName;
     private String    thingDescribe;
     private byte[]    thingVoice;

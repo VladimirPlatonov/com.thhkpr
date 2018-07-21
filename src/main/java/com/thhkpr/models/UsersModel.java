@@ -12,7 +12,7 @@ import org.jooq.types.ULong;
 @Getter
 public class UsersModel
 {
-    private ULong   userId;
+    private Integer userId;
     private String  userName;
     private String  userLogin;
     private String  userPassword;

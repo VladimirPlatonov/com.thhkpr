@@ -46,7 +46,7 @@ public class MainController
 	}
 	
 	@DeleteMapping(value = "{id}")
-	public ResponseEntity<Users> remove(@PathVariable(value = "id") ULong id)
+	public ResponseEntity<Users> remove(@PathVariable(value = "id") Integer id)
 	{
 		log.info("===== remove ===== {}", id);
 		
@@ -68,7 +68,7 @@ public class MainController
 	}
 	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<Users> id(@PathVariable(value = "id") ULong id)
+	public ResponseEntity<Users> id(@PathVariable(value = "id") Integer id)
 	{
 		log.info("===== id ===== {}", id);
 		

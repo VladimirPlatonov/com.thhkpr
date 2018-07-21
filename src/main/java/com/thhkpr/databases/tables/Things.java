@@ -27,7 +27,6 @@ import org.jooq.TableField;
 import org.jooq.UniqueKey;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
-import org.jooq.types.ULong;
 
 
 /**
@@ -43,7 +42,7 @@ import org.jooq.types.ULong;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Things extends TableImpl<ThingsRecord> {
 
-    private static final long serialVersionUID = -76316090;
+    private static final long serialVersionUID = 309442851;
 
     /**
      * The reference instance of <code>thhkpr.things</code>
@@ -61,7 +60,7 @@ public class Things extends TableImpl<ThingsRecord> {
     /**
      * The column <code>thhkpr.things.thing_id</code>.
      */
-    public final TableField<ThingsRecord, ULong> THING_ID = createField("thing_id", org.jooq.impl.SQLDataType.BIGINTUNSIGNED.nullable(false).identity(true), this, "");
+    public final TableField<ThingsRecord, Integer> THING_ID = createField("thing_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>thhkpr.things.thing_name</code>.
@@ -92,6 +91,11 @@ public class Things extends TableImpl<ThingsRecord> {
      * The column <code>thhkpr.things.sys_who_update_name</code>.
      */
     public final TableField<ThingsRecord, String> SYS_WHO_UPDATE_NAME = createField("sys_who_update_name", org.jooq.impl.SQLDataType.VARCHAR(500), this, "");
+
+    /**
+     * The column <code>thhkpr.things.storage_id</code>.
+     */
+    public final TableField<ThingsRecord, Integer> STORAGE_ID = createField("storage_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
      * Create a <code>thhkpr.things</code> table reference
@@ -139,14 +143,14 @@ public class Things extends TableImpl<ThingsRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.THINGS_PRIMARY, Indexes.THINGS_THINGS_THING_ID_INDEX, Indexes.THINGS_THINGS_THING_NAME_INDEX, Indexes.THINGS_THING_ID);
+        return Arrays.<Index>asList(Indexes.THINGS_PRIMARY, Indexes.THINGS_THINGS_STORAGE_ID_INDEX, Indexes.THINGS_THINGS_THING_ID_INDEX, Indexes.THINGS_THINGS_THING_NAME_INDEX, Indexes.THINGS_THING_ID);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Identity<ThingsRecord, ULong> getIdentity() {
+    public Identity<ThingsRecord, Integer> getIdentity() {
         return Keys.IDENTITY_THINGS;
     }
 

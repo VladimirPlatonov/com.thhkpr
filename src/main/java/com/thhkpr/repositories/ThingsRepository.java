@@ -18,12 +18,12 @@ import java.util.List;
 public class ThingsRepository
 {
 	Things things = Things.THINGS;
-	
+
 	@Autowired
 	private DSLContext dsl;
 
 
-	public ULong insert(ThingsModel thingsModel)
+	public Integer insert(ThingsModel thingsModel)
     {
         Timestamp currentDateTime = new Timestamp( (new Date()).getTime());
 
@@ -47,7 +47,7 @@ public class ThingsRepository
 				.fetchOne();
 		return thingsRecord.getValue(things.THING_ID);
 	}
-	
+
 	public boolean update(ThingsModel thingsModel)
     {
 		return dsl.update(things)
@@ -60,20 +60,20 @@ public class ThingsRepository
 				.execute() == 1;
 	}
 
-	public boolean delete(ULong id)
+	public boolean delete(Integer id)
 	{
 		return dsl.deleteFrom(things)
 				.where(things.THING_ID.eq(id))
 				.execute() == 1;
 	}
-	
+
 	public List<com.thhkpr.databases.tables.pojos.Things> selectAll()
 	{
 		return dsl.selectFrom(things)
                 .fetchInto(com.thhkpr.databases.tables.pojos.Things.class);
 	}
-	
-	public com.thhkpr.databases.tables.pojos.Things selectOneById(ULong id)
+
+	public com.thhkpr.databases.tables.pojos.Things selectOneById(Integer id)
 	{
 		return dsl.selectFrom(things)
 				.where(things.THING_ID.eq(id))

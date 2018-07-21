@@ -21,7 +21,7 @@ public class UsersService
 
 	public Users save(UsersModel usersModel)
 	{
-		ULong id = usersRepository.insert(usersModel);
+        Integer id = usersRepository.insert(usersModel);
 
 		return getOneById(id);
 	}
@@ -33,7 +33,7 @@ public class UsersService
 		return getOneById(usersModel.getUserId());
 	}
 
-	public Users remove(ULong id)
+	public Users remove(Integer id)
 	{
 		usersRepository.delete(id);
 		
@@ -45,7 +45,7 @@ public class UsersService
 		return usersRepository.selectAll();
 	}
 	
-	public Users getOneById(ULong id)
+	public Users getOneById(Integer id)
 	{
 		return usersRepository.selectOneById(id);
 	}

@@ -13,9 +13,9 @@ import org.jooq.types.ULong;
 @Getter
 public class SettingsModel
 {
-    private ULong settingsId;
-    private String settingsName;
-    private String settingsValue;
+    private Integer settingsId;
+    private String  settingsName;
+    private String  settingsValue;
 
 
 }

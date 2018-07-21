@@ -21,7 +21,7 @@ public class StorageRepository
 	private DSLContext dsl;
 
 
-	public ULong insert(StorageModel storageModel)
+	public Integer insert(StorageModel storageModel)
     {
 		StorageRecord storageRecord = dsl.insertInto(
 					storage,
@@ -47,7 +47,7 @@ public class StorageRepository
 				.execute() == 1;
 	}
 
-	public boolean delete(ULong id)
+	public boolean delete(Integer id)
 	{
 		return dsl.deleteFrom(storage)
 				.where(storage.STORAGE_ID.eq(id))
@@ -60,7 +60,7 @@ public class StorageRepository
                 .fetchInto(com.thhkpr.databases.tables.pojos.Storage.class);
 	}
 	
-	public com.thhkpr.databases.tables.pojos.Storage selectOneById(ULong id)
+	public com.thhkpr.databases.tables.pojos.Storage selectOneById(Integer id)
 	{
 		return dsl.selectFrom(storage)
 				.where(storage.STORAGE_ID.eq(id))

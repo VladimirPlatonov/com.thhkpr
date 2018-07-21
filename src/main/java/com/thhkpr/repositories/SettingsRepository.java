@@ -23,7 +23,7 @@ public class SettingsRepository
 	private DSLContext dsl;
 
 
-	public ULong insert(SettingsModel settingsModel)
+	public Integer insert(SettingsModel settingsModel)
     {
 		SettingsRecord settingsRecord = dsl.insertInto(
 		            settings,
@@ -46,7 +46,7 @@ public class SettingsRepository
 				.execute() == 1;
 	}
 
-	public boolean delete(ULong id)
+	public boolean delete(Integer id)
 	{
 		return dsl.deleteFrom(settings)
 				.where(settings.SETTINGS_ID.eq(id))
