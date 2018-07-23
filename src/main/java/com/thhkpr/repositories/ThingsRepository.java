@@ -21,7 +21,6 @@ public class ThingsRepository
 	@Autowired
 	private DSLContext dsl;
 
-
 	public Integer insert(ThingsModel thingsModel)
     {
         Timestamp currentDateTime = new Timestamp( (new Date()).getTime());
@@ -39,7 +38,7 @@ public class ThingsRepository
 						thingsModel.getThingName(),
 						thingsModel.getThingDescribe(),
                         null,
-                      //  null,
+                        //null,
                         currentDateTime,
                         currentDateTime,
 						"undefined user"
@@ -72,7 +71,7 @@ public class ThingsRepository
 
 	public List<com.thhkpr.databases.tables.pojos.Things> selectAll()
 	{
-		return dsl.selectFrom(things)
+		return dsl.selectFrom(things).orderBy(things.SYS_WHO_UPDATE_NAME.desc())
                 .fetchInto(com.thhkpr.databases.tables.pojos.Things.class);
 	}
 

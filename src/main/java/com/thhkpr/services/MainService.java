@@ -1,9 +1,9 @@
 package com.thhkpr.services;
 
 import com.thhkpr.databases.tables.pojos.Things;
-import com.thhkpr.databases.tables.pojos.Settings;
 import com.thhkpr.databases.tables.pojos.Storage;
 import com.thhkpr.databases.tables.pojos.Users;
+import com.thhkpr.models.StorageModel;
 import com.thhkpr.models.ThingsModel;
 import com.thhkpr.models.UsersModel;
 import com.thhkpr.repositories.SettingsRepository;
@@ -28,15 +28,7 @@ public class MainService
 	private SettingsRepository settingsRepository;
 
 
-	public Things putThing (ThingsModel thingsModel)
-    {
-        //get storage_id by (fuzzySearch in storage names)
-        Integer id = thingsRepository.insert(thingsModel);
-
-	    return getOneThingById(id);
-    }
-
-	public Users addUsers(UsersModel usersModel)
+    public Users addUsers(UsersModel usersModel)
 	{
         Integer id = usersRepository.insert(usersModel);
 
@@ -49,8 +41,16 @@ public class MainService
 
 		return getOneThingById(id);
 	}
-	
-	public Users edit(UsersModel usersModel)
+
+    public Storage addStorage (StorageModel storageModel)
+    {
+        Integer id = storagesRepository.insert(storageModel);
+
+	    return getOneStorageById(id);
+    }
+
+
+    public Users edit(UsersModel usersModel)
 	{
 		usersRepository.update(usersModel);
 		
@@ -64,6 +64,7 @@ public class MainService
 		return getOneUserById(id);
 	}
 
+
 	public List<Users> getAllUsers()
 	{
 		return usersRepository.selectAll();
@@ -74,9 +75,20 @@ public class MainService
 		return thingsRepository.selectAll();
 	}
 
+	public List<Storage> getAllStorage()
+	{
+		return storagesRepository.selectAll();
+	}
+
+
 	public Users getOneUserById(Integer id)
 	{
-		return usersRepository.selectOneById(id);
+	    return usersRepository.selectOneById(id);
+	}
+
+	public Storage getOneStorageById(Integer id)
+	{
+	    return storagesRepository.selectOneById(id);
 	}
 
 	public Things getOneThingById(Integer id)
