@@ -1,37 +1,38 @@
 package com.thhkpr.controllers;
 
 import com.thhkpr.databases.tables.pojos.Users;
+import com.thhkpr.databases.tables.pojos.Things;
 import com.thhkpr.models.UsersModel;
-import com.thhkpr.services.UsersService;
+import com.thhkpr.models.ThingsModel;
+import com.thhkpr.services.MainService;
 import lombok.extern.slf4j.Slf4j;
-import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/api")
 public class MainController
 {
 	@Autowired
-	private UsersService usersService;
+	private MainService mainService;
 
-	@PostMapping(value = "")
-	public ResponseEntity<Users> save(@RequestBody(required = true) UsersModel usersModel)
+    @RequestMapping("/add")
+	//@PostMapping(value = "")
+	public ResponseEntity<Things> save(@RequestBody(required = true) ThingsModel thingsModel)
 	{
-		log.info("===== save ===== {}", usersModel);
+		log.info("===== save ===== {}", thingsModel);
 
-		Users users = usersService.save(usersModel);
+		Things things = mainService.addThings(thingsModel);
 		
-		log.info("{}", users);
+		log.info("{}", things);
 		
-		return ResponseEntity.ok(users);
+		return ResponseEntity.ok(things);
 	}
 
-
+    /*
 	@PutMapping(value = "")
 	public ResponseEntity<Users> edit(@RequestBody(required = true) UsersModel usersModel)
 	{
@@ -41,11 +42,11 @@ public class MainController
 		
 		log.info("{}", users);
 
-		
 		return ResponseEntity.ok(users);
-	}
+	}*/
 	
-	@DeleteMapping(value = "{id}")
+	/*
+    @DeleteMapping(value = "{id}")
 	public ResponseEntity<Users> remove(@PathVariable(value = "id") Integer id)
 	{
 		log.info("===== remove ===== {}", id);
@@ -55,25 +56,25 @@ public class MainController
 		log.info("{}", users);
 		
 		return ResponseEntity.ok(users);
-	}
+	}*/
 	
 	@GetMapping(value = "")
-	public ResponseEntity<List<Users>> all()
+	public ResponseEntity<List<Things>> all()
 	{
 		log.info("===== all =====");
 
-		List<Users> users = usersService.getAll();
+		List<Things> things = mainService.getAllThings();
 		
-		return ResponseEntity.ok(users);
+		return ResponseEntity.ok(things);
 	}
 	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<Users> id(@PathVariable(value = "id") Integer id)
+	public ResponseEntity<Things> id(@PathVariable(value = "id") Integer id)
 	{
 		log.info("===== id ===== {}", id);
 		
-		Users users = usersService.getOneById(id);
+		Things things = mainService.getOneThingById(id);
 		
-		return ResponseEntity.ok(users);
+		return ResponseEntity.ok(things);
 	}
 }

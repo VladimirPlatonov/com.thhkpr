@@ -15,6 +15,7 @@ import com.thhkpr.databases.tables.records.UsersRecord;
 
 import javax.annotation.Generated;
 
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
@@ -60,6 +61,7 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<ThingsRecord, StorageRecord> STORAGE_ID_FK = ForeignKeys0.STORAGE_ID_FK;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -81,5 +83,9 @@ public class Keys {
         public static final UniqueKey<ThingsRecord> KEY_THINGS_THING_ID = Internal.createUniqueKey(Things.THINGS, "KEY_things_thing_id", Things.THINGS.THING_ID);
         public static final UniqueKey<UsersRecord> KEY_USERS_PRIMARY = Internal.createUniqueKey(Users.USERS, "KEY_users_PRIMARY", Users.USERS.USER_ID);
         public static final UniqueKey<UsersRecord> KEY_USERS_USER_ID = Internal.createUniqueKey(Users.USERS, "KEY_users_user_id", Users.USERS.USER_ID);
+    }
+
+    private static class ForeignKeys0 {
+        public static final ForeignKey<ThingsRecord, StorageRecord> STORAGE_ID_FK = Internal.createForeignKey(com.thhkpr.databases.Keys.KEY_STORAGE_PRIMARY, Things.THINGS, "storage_id_fk", Things.THINGS.STORAGE_ID);
     }
 }

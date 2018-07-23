@@ -4,7 +4,6 @@ import com.thhkpr.databases.tables.Things;
 import com.thhkpr.databases.tables.records.ThingsRecord;
 import com.thhkpr.models.ThingsModel;
 import org.jooq.DSLContext;
-import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +31,7 @@ public class ThingsRepository
 					things.THING_NAME,
 					things.THING_DESCRIBE,
 					things.THING_VOICE,
+					//things.THING_STORAGEID,
 					things.SYS_DATE_CREATE,
 					things.SYS_DATE_UPDATE,
 					things.SYS_WHO_UPDATE_NAME)
@@ -39,6 +39,7 @@ public class ThingsRepository
 						thingsModel.getThingName(),
 						thingsModel.getThingDescribe(),
                         null,
+                      //  null,
                         currentDateTime,
                         currentDateTime,
 						"undefined user"
@@ -50,11 +51,13 @@ public class ThingsRepository
 
 	public boolean update(ThingsModel thingsModel)
     {
+        Timestamp currentDateTime = new Timestamp( (new Date()).getTime());
+
 		return dsl.update(things)
 				.set(things.THING_NAME, thingsModel.getThingName())
                 .set(things.THING_DESCRIBE, thingsModel.getThingDescribe())
                 .set(things.THING_VOICE, thingsModel.getThingVoice())
-                .set(things.SYS_DATE_UPDATE, thingsModel.getSysDateUpdate())
+                .set(things.SYS_DATE_UPDATE, currentDateTime) //thingsModel.getSysDateUpdate())
                 .set(things.SYS_WHO_UPDATE_NAME, thingsModel.getSysWhoUpdateName())
 				.where(things.THING_ID.equal(thingsModel.getThingId()))
 				.execute() == 1;

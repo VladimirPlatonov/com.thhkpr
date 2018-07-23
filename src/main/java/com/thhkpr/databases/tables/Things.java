@@ -42,7 +42,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Things extends TableImpl<ThingsRecord> {
 
-    private static final long serialVersionUID = 309442851;
+    private static final long serialVersionUID = -1562551821;
 
     /**
      * The reference instance of <code>thhkpr.things</code>
@@ -85,7 +85,7 @@ public class Things extends TableImpl<ThingsRecord> {
     /**
      * The column <code>thhkpr.things.sys_date_update</code>.
      */
-    public final TableField<ThingsRecord, Timestamp> SYS_DATE_UPDATE = createField("sys_date_update", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false).defaultValue(org.jooq.impl.DSL.inline("0000-00-00 00:00:00", org.jooq.impl.SQLDataType.TIMESTAMP)), this, "");
+    public final TableField<ThingsRecord, Timestamp> SYS_DATE_UPDATE = createField("sys_date_update", org.jooq.impl.SQLDataType.TIMESTAMP.nullable(false), this, "");
 
     /**
      * The column <code>thhkpr.things.sys_who_update_name</code>.
@@ -168,6 +168,18 @@ public class Things extends TableImpl<ThingsRecord> {
     @Override
     public List<UniqueKey<ThingsRecord>> getKeys() {
         return Arrays.<UniqueKey<ThingsRecord>>asList(Keys.KEY_THINGS_PRIMARY, Keys.KEY_THINGS_THING_ID);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ForeignKey<ThingsRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<ThingsRecord, ?>>asList(Keys.STORAGE_ID_FK);
+    }
+
+    public Storage storage() {
+        return new Storage(this, Keys.STORAGE_ID_FK);
     }
 
     /**

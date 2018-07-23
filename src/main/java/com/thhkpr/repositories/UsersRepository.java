@@ -4,7 +4,6 @@ import com.thhkpr.databases.tables.Users;
 import com.thhkpr.databases.tables.records.UsersRecord;
 import com.thhkpr.models.UsersModel;
 import org.jooq.DSLContext;
-import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
