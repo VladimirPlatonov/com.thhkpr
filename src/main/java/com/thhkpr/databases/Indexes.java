@@ -36,7 +36,7 @@ public class Indexes {
     public static final Index SETTINGS_PRIMARY = Indexes0.SETTINGS_PRIMARY;
     public static final Index SETTINGS_SETTINGS_ID = Indexes0.SETTINGS_SETTINGS_ID;
     public static final Index SETTINGS_SETTINGS_SETTINGS_ID_INDEX = Indexes0.SETTINGS_SETTINGS_SETTINGS_ID_INDEX;
-    public static final Index SETTINGS_SETTINGS_SETTINGS_NAME_INDEX = Indexes0.SETTINGS_SETTINGS_SETTINGS_NAME_INDEX;
+    public static final Index SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX = Indexes0.SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX;
     public static final Index STORAGE_PRIMARY = Indexes0.STORAGE_PRIMARY;
     public static final Index STORAGE_STORAGE_ID = Indexes0.STORAGE_STORAGE_ID;
     public static final Index STORAGE_STORAGE_NAME_INDEX = Indexes0.STORAGE_STORAGE_NAME_INDEX;
@@ -60,7 +60,7 @@ public class Indexes {
         public static Index SETTINGS_PRIMARY = Internal.createIndex("PRIMARY", Settings.SETTINGS, new OrderField[] { Settings.SETTINGS.SETTINGS_ID }, true);
         public static Index SETTINGS_SETTINGS_ID = Internal.createIndex("settings_id", Settings.SETTINGS, new OrderField[] { Settings.SETTINGS.SETTINGS_ID }, true);
         public static Index SETTINGS_SETTINGS_SETTINGS_ID_INDEX = Internal.createIndex("settings_settings_id_index", Settings.SETTINGS, new OrderField[] { Settings.SETTINGS.SETTINGS_ID }, false);
-        public static Index SETTINGS_SETTINGS_SETTINGS_NAME_INDEX = Internal.createIndex("settings_settings_name_index", Settings.SETTINGS, new OrderField[] { Settings.SETTINGS.SETTINGS_NAME }, false);
+        public static Index SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX = Internal.createIndex("settings_settings_name_uindex", Settings.SETTINGS, new OrderField[] { Settings.SETTINGS.SETTINGS_NAME }, true);
         public static Index STORAGE_PRIMARY = Internal.createIndex("PRIMARY", Storage.STORAGE, new OrderField[] { Storage.STORAGE.STORAGE_ID }, true);
         public static Index STORAGE_STORAGE_ID = Internal.createIndex("storage_id", Storage.STORAGE, new OrderField[] { Storage.STORAGE.STORAGE_ID }, true);
         public static Index STORAGE_STORAGE_NAME_INDEX = Internal.createIndex("storage_name_index", Storage.STORAGE, new OrderField[] { Storage.STORAGE.STORAGE_NAME }, false);

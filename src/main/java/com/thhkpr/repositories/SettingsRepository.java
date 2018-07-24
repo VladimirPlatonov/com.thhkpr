@@ -62,7 +62,14 @@ public class SettingsRepository
 	public com.thhkpr.databases.tables.pojos.Settings selectOneById(String par)
 	{
 		return dsl.selectFrom(settings)
-				.where(settings.SETTINGS_NAME.equal(par))
+				.where(settings.SETTINGS_NAME.likeIgnoreCase(par))
+				.fetchOneInto(com.thhkpr.databases.tables.pojos.Settings.class);
+	}
+
+	public com.thhkpr.databases.tables.pojos.Settings selectOneById(Integer par)
+	{
+		return dsl.selectFrom(settings)
+				.where(settings.SETTINGS_ID.eq(par))
 				.fetchOneInto(com.thhkpr.databases.tables.pojos.Settings.class);
 	}
 }

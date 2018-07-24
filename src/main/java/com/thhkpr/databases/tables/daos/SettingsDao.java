@@ -72,6 +72,13 @@ public class SettingsDao extends DAOImpl<SettingsRecord, com.thhkpr.databases.ta
     }
 
     /**
+     * Fetch a unique record that has <code>settings_name = value</code>
+     */
+    public com.thhkpr.databases.tables.pojos.Settings fetchOneBySettingsName(String value) {
+        return fetchOne(Settings.SETTINGS.SETTINGS_NAME, value);
+    }
+
+    /**
      * Fetch records that have <code>settings_value IN (values)</code>
      */
     public List<com.thhkpr.databases.tables.pojos.Settings> fetchBySettingsValue(String... values) {

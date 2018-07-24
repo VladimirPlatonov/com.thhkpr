@@ -2,7 +2,7 @@ package com.thhkpr.controllers;
 
 import com.thhkpr.databases.tables.pojos.Storage;
 import com.thhkpr.models.StorageModel;
-import com.thhkpr.services.MainService;
+import com.thhkpr.services.StorageService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +19,14 @@ import java.util.List;
 public class StorageController
 {
 	@Autowired
-	private MainService mainService;
+	private StorageService storageService;
 
     @GetMapping(value = "")
     public ResponseEntity<List<Storage>> allStorage ()
     {
         log.info("===== all =====");
 
-        List<Storage> storage = mainService.getAllStorage();
+        List<Storage> storage = storageService.getAllStorage();
 
         return ResponseEntity.ok(storage);
     }
@@ -37,27 +37,28 @@ public class StorageController
     {
         log.info("===== insert ===== {}", storageModel);
 
-        Storage storage = mainService.addStorage(storageModel);
+        Storage storage = storageService.addStorage(storageModel);
 
         log.info("{}", storage);
 
         return ResponseEntity.ok(storage);
     }
 
-    /*
-	@PutMapping(value = "")
-	public ResponseEntity<Users> edit(@RequestBody(required = true) UsersModel usersModel)
+
+    @RequestMapping("edit")
+	public ResponseEntity<Storage> edit(@RequestBody(required = true) StorageModel storageModel)
 	{
-		log.info("===== edit ===== {}", usersModel);
+		log.info("===== edit ===== {}", storageModel);
 
-		Users users = usersService.edit(usersModel);
+		Storage storage = storageService.editStorage(storageModel);
 
-		log.info("{}", users);
+		log.info("{}", storage);
 
-		return ResponseEntity.ok(users);
+		return ResponseEntity.ok(storage);
 	}
 
 
+    /*
     @DeleteMapping(value = "{id}")
 	public ResponseEntity<Users> remove(@PathVariable(value = "id") Integer id)
 	{

@@ -4,7 +4,6 @@ import com.thhkpr.databases.tables.Storage;
 import com.thhkpr.databases.tables.records.StorageRecord;
 import com.thhkpr.models.StorageModel;
 import org.jooq.DSLContext;
-import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,6 +63,13 @@ public class StorageRepository
 	{
 		return dsl.selectFrom(storage)
 				.where(storage.STORAGE_ID.eq(id))
+				.fetchOneInto(com.thhkpr.databases.tables.pojos.Storage.class);
+	}
+
+	public com.thhkpr.databases.tables.pojos.Storage selectOneByName(String paramName)
+	{
+		return dsl.selectFrom(storage)
+				.where(storage.STORAGE_NAME.likeIgnoreCase(paramName))
 				.fetchOneInto(com.thhkpr.databases.tables.pojos.Storage.class);
 	}
 }

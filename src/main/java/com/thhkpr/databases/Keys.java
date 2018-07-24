@@ -50,6 +50,7 @@ public class Keys {
 
     public static final UniqueKey<SettingsRecord> KEY_SETTINGS_PRIMARY = UniqueKeys0.KEY_SETTINGS_PRIMARY;
     public static final UniqueKey<SettingsRecord> KEY_SETTINGS_SETTINGS_ID = UniqueKeys0.KEY_SETTINGS_SETTINGS_ID;
+    public static final UniqueKey<SettingsRecord> KEY_SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX = UniqueKeys0.KEY_SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX;
     public static final UniqueKey<StorageRecord> KEY_STORAGE_PRIMARY = UniqueKeys0.KEY_STORAGE_PRIMARY;
     public static final UniqueKey<StorageRecord> KEY_STORAGE_STORAGE_ID = UniqueKeys0.KEY_STORAGE_STORAGE_ID;
     public static final UniqueKey<ThingsRecord> KEY_THINGS_PRIMARY = UniqueKeys0.KEY_THINGS_PRIMARY;
@@ -77,6 +78,7 @@ public class Keys {
     private static class UniqueKeys0 {
         public static final UniqueKey<SettingsRecord> KEY_SETTINGS_PRIMARY = Internal.createUniqueKey(Settings.SETTINGS, "KEY_settings_PRIMARY", Settings.SETTINGS.SETTINGS_ID);
         public static final UniqueKey<SettingsRecord> KEY_SETTINGS_SETTINGS_ID = Internal.createUniqueKey(Settings.SETTINGS, "KEY_settings_settings_id", Settings.SETTINGS.SETTINGS_ID);
+        public static final UniqueKey<SettingsRecord> KEY_SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX = Internal.createUniqueKey(Settings.SETTINGS, "KEY_settings_settings_settings_name_uindex", Settings.SETTINGS.SETTINGS_NAME);
         public static final UniqueKey<StorageRecord> KEY_STORAGE_PRIMARY = Internal.createUniqueKey(Storage.STORAGE, "KEY_storage_PRIMARY", Storage.STORAGE.STORAGE_ID);
         public static final UniqueKey<StorageRecord> KEY_STORAGE_STORAGE_ID = Internal.createUniqueKey(Storage.STORAGE, "KEY_storage_storage_id", Storage.STORAGE.STORAGE_ID);
         public static final UniqueKey<ThingsRecord> KEY_THINGS_PRIMARY = Internal.createUniqueKey(Things.THINGS, "KEY_things_PRIMARY", Things.THINGS.THING_ID);

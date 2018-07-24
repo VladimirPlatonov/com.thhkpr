@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Settings extends TableImpl<SettingsRecord> {
 
-    private static final long serialVersionUID = -1203549969;
+    private static final long serialVersionUID = 1499086075;
 
     /**
      * The reference instance of <code>thhkpr.settings</code>
@@ -117,7 +117,7 @@ public class Settings extends TableImpl<SettingsRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.SETTINGS_PRIMARY, Indexes.SETTINGS_SETTINGS_ID, Indexes.SETTINGS_SETTINGS_SETTINGS_ID_INDEX, Indexes.SETTINGS_SETTINGS_SETTINGS_NAME_INDEX);
+        return Arrays.<Index>asList(Indexes.SETTINGS_PRIMARY, Indexes.SETTINGS_SETTINGS_ID, Indexes.SETTINGS_SETTINGS_SETTINGS_ID_INDEX, Indexes.SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX);
     }
 
     /**
@@ -141,7 +141,7 @@ public class Settings extends TableImpl<SettingsRecord> {
      */
     @Override
     public List<UniqueKey<SettingsRecord>> getKeys() {
-        return Arrays.<UniqueKey<SettingsRecord>>asList(Keys.KEY_SETTINGS_PRIMARY, Keys.KEY_SETTINGS_SETTINGS_ID);
+        return Arrays.<UniqueKey<SettingsRecord>>asList(Keys.KEY_SETTINGS_PRIMARY, Keys.KEY_SETTINGS_SETTINGS_ID, Keys.KEY_SETTINGS_SETTINGS_SETTINGS_NAME_UINDEX);
     }
 
     /**

@@ -2,10 +2,9 @@ package com.thhkpr.controllers;
 
 import com.thhkpr.databases.tables.pojos.Things;
 import com.thhkpr.models.ThingsModel;
-import com.thhkpr.services.MainService;
+import com.thhkpr.services.ThingsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -16,7 +15,26 @@ import java.util.List;
 public class ThingsController
 {
 	@Autowired
-	private MainService mainService;
+	private ThingsService thingsService;
+
+	/*
+	* Example Joins on two tables
+	Map<UserPojo, List<RolePojo>> result =
+    dsl.select(USER.fields())
+   .select(ROLE.fields())
+   .from(USER)
+   .join(USER_TO_ROLE).on(USER.USER_ID.eq(USER_TO_ROLE.USER_ID))
+   .join(ROLE).on(ROLE.ROLE_ID.eq(USER_TO_ROLE.ROLE_ID))
+   .where(USER.U_EMAIL.equal(email))
+   .fetchGroups(
+
+       // Map records first into the USER table and then into the key POJO type
+       r -> r.into(USER).into(UserPojo.class),
+
+       // Map records first into the ROLE table and then into the value POJO type
+       r -> r.into(ROLE).into(RolePojo.class)
+   );
+	*/
 
     /*
 	@PutMapping(value = "")
@@ -49,7 +67,7 @@ public class ThingsController
 	{
 		log.info("===== all =====");
 
-		List<Things> things = mainService.getAllThings();
+		List<Things> things = thingsService.getAllThings();
 		
 		return ResponseEntity.ok(things);
 	}
@@ -61,7 +79,7 @@ public class ThingsController
     {
         log.info("===== insert ===== {}", thingsModel);
 
-        Things things = mainService.addThings(thingsModel);
+        Things things = thingsService.addThings(thingsModel);
 
         log.info("{}", things);
 
@@ -73,7 +91,7 @@ public class ThingsController
 	{
 		log.info("===== id ===== {}", id);
 		
-		Things things = mainService.getOneThingById(id);
+		Things things = thingsService.getOneThingById(id);
 		
 		return ResponseEntity.ok(things);
 	}
