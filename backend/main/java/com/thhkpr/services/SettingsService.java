@@ -16,16 +16,16 @@ public class SettingsService
 
     public Settings add (SettingsModel settingsModel)
 	{
-        Integer id = settingsRepository.insert(settingsModel);
-
-		return getOneById(id);
-	}
+        return
+         (getOneById(settingsModel.getSettingsName()) == null)
+                ? getOneById(settingsRepository.insert(settingsModel))
+                : edit(settingsModel);
+ 	}
 
     public Settings edit (SettingsModel settingsModel)
 	{
-        settingsRepository.update(settingsModel);
+        return getOneById( settingsRepository.update(settingsModel) );
 
-		return getOneById(settingsModel.getSettingsId());
 	}
 
 	public Settings remove (Integer id)

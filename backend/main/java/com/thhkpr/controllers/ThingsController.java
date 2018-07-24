@@ -68,6 +68,8 @@ public class ThingsController
 		log.info("===== all =====");
 
 		List<Things> things = thingsService.getAllThings();
+
+        log.info("{}", things);
 		
 		return ResponseEntity.ok(things);
 	}
@@ -92,6 +94,8 @@ public class ThingsController
 		log.info("===== id ===== {}", id);
 		
 		Things things = thingsService.getOneThingById(id);
+
+        log.info("{}", things);
 		
 		return ResponseEntity.ok(things);
 	}

@@ -3,6 +3,7 @@ package com.thhkpr.repositories;
 import com.thhkpr.databases.tables.Settings;
 import com.thhkpr.databases.tables.records.SettingsRecord;
 import com.thhkpr.models.SettingsModel;
+import lombok.extern.slf4j.Slf4j;
 import org.jooq.DSLContext;
 import org.jooq.types.ULong;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Slf4j
 @Transactional
 @Repository
 public class SettingsRepository
@@ -37,13 +39,19 @@ public class SettingsRepository
 		return settingsRecord.getValue(settings.SETTINGS_ID);
 	}
 	
-	public boolean update(SettingsModel settingsModel)
+	public Integer update(SettingsModel settingsModel)
     {
-		return dsl.update(settings)
+        Boolean b =
+                dsl.update(settings)
 				.set(settings.SETTINGS_NAME, settingsModel.getSettingsName())
                 .set(settings.SETTINGS_VALUE, settingsModel.getSettingsValue())
-				.where(settings.SETTINGS_ID.equal(settingsModel.getSettingsId()))
+				.where(
+						settings.SETTINGS_ID.equal(settingsModel.getSettingsId())
+                    .or(settings.SETTINGS_NAME.equal(settingsModel.getSettingsName()))
+                    )
 				.execute() == 1;
+
+		return b ? selectOneById(settingsModel.getSettingsName()).getSettingsId() : -1;
 	}
 
 	public boolean delete(Integer id)

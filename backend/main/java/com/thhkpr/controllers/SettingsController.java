@@ -19,28 +19,27 @@ public class SettingsController
 	private SettingsService settingsService;
 
  	@GetMapping(value = "")
-	public ResponseEntity<List<Settings>> allSettings ()
+	public ResponseEntity<List<Settings>> all ()
 	{
 		log.info("===== all =====");
 
 		List<Settings> settings = settingsService.getAll();
 
-        log.info(settings.toString() );
+        log.info("{}", settings.toString() );
 		
 		return ResponseEntity.ok(settings);
 	}
 
-    @RequestMapping("update")
-    //@PostMapping(value = "")
-    public ResponseEntity<Settings> save(@RequestBody(required = true) SettingsModel settingsModel)
+    @RequestMapping("add")
+    public ResponseEntity<Settings> save (@RequestBody(required = true) SettingsModel settingsModel)
     {
-        log.info("===== insert ===== {}", settingsModel);
+        log.info("===== upsert ===== {}", settingsModel);
 
-        Settings things = settingsService.add(settingsModel);
+        Settings setting = settingsService.add(settingsModel);
 
-        log.info("{}", things);
+        log.info("{}", setting.toString());
 
-        return ResponseEntity.ok(things);
+        return ResponseEntity.ok(setting);
     }
 
 }

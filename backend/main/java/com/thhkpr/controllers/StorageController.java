@@ -28,6 +28,8 @@ public class StorageController
 
         List<Storage> storage = storageService.getAllStorage();
 
+        log.info("{}", storage.toString() );
+
         return ResponseEntity.ok(storage);
     }
 
@@ -43,7 +45,6 @@ public class StorageController
 
         return ResponseEntity.ok(storage);
     }
-
 
     @RequestMapping("edit")
 	public ResponseEntity<Storage> edit(@RequestBody(required = true) StorageModel storageModel)
