@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
+import com.thhkpr.response.*;
+
 @Slf4j
 @RestController
-@RequestMapping("/things")
+@RequestMapping("/api/things")
 public class ThingsController
 {
 	@Autowired
