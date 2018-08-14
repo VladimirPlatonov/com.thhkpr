@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.springframework.boot:spring-boot-starter-jooq:2.0.3.RELEASE">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-jooq/2.0.3.RELEASE/db09c95821466e26f3a9783d5b43f1b6b371b03c/spring-boot-starter-jooq-2.0.3.RELEASE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.springframework.boot/spring-boot-starter-jooq/2.0.3.RELEASE/433335798d95b152ad594b7abbfc370ad9ffc172/spring-boot-starter-jooq-2.0.3.RELEASE-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

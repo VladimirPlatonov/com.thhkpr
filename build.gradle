@@ -43,7 +43,7 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
     compile group: 'org.projectlombok', name: 'lombok-maven-plugin', version: '1.18.0.0'
     compile 'org.springframework.boot:spring-boot-starter-jooq'
-    //compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-web'
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'junit:junit:4.11'
