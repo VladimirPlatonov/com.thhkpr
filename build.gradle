@@ -1,3 +1,8 @@
+import groovy.xml.MarkupBuilder
+import org.jooq.codegen.GenerationTool
+
+import javax.xml.bind.JAXB
+
 group 'com.thhkpr'
 version '1.0-SNAPSHOT'
 
@@ -15,6 +20,7 @@ apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'com.moowork.node'
+apply plugin: 'war'
 
 bootJar {
     baseName = 'gs-rest-service'
@@ -64,7 +70,7 @@ buildscript {
 }
 
 def writer = new StringWriter()
-def xml = new groovy.xml.MarkupBuilder(writer)
+def xml = new MarkupBuilder(writer)
         .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.11.0.xsd') {
     jdbc() {
         driver('com.mysql.cj.jdbc.Driver')
@@ -104,10 +110,11 @@ def xml = new groovy.xml.MarkupBuilder(writer)
     }
 }
 
+
 // Run the code generator
 // ----------------------
-org.jooq.codegen.GenerationTool.generate(
-        javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.meta.jaxb.Configuration.class)
+GenerationTool.generate(
+        JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.meta.jaxb.Configuration.class)
 )
 
 ///
@@ -123,3 +130,4 @@ task webpack(type: NodeTask, dependsOn: 'npmInstall') {
 processResources.dependsOn 'webpack'
 
 clean.delete << file('node_modules')
+

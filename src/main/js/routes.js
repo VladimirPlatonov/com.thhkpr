@@ -45,3 +45,13 @@ export default new Router({
 
     ]
 })
+
+module.exports = [
+    {
+        path: '/',
+        component: require('./pages/Home.vue'),
+        meta: {
+            title: 'Home'
+        }
+    }
+]
