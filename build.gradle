@@ -1,100 +1,76 @@
-import groovy.xml.MarkupBuilder
-import org.jooq.codegen.GenerationTool
-
-import javax.xml.bind.JAXB
-
-group 'com.thhkpr'
-version '1.0-SNAPSHOT'
-
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
         maven {
             url "https://plugins.gradle.org/m2/"
         }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.3.RELEASE")
-        classpath 'com.moowork.gradle:gradle-node-plugin:0.12'
-    }
-}
-
-apply plugin: 'java'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.moowork.node'
-apply plugin: 'war'
-apply plugin: 'org.liang.gradle.plugin.executable-jar'
-
-bootJar {
-    baseName = 'gs-rest-service'
-    version =  '0.1.0'
-}
-
-node {
-    version = '6.6.0'
-    npmVersion = '3.10.7'
-    download = true
-}
-
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-repositories {
-    mavenLocal()
-    mavenCentral()
-}
-
-dependencies {
-    runtime group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-
-    compile group: 'org.jooq', name: 'jooq', version: '3.11.3'
-    compile group: 'org.jooq', name: 'jooq-codegen-maven', version: '3.11.3'
-    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
-    compile group: 'org.projectlombok', name: 'lombok-maven-plugin', version: '1.18.0.0'
-    compile 'org.springframework.boot:spring-boot-starter-jooq'
-    compile 'org.springframework.boot:spring-boot-starter-web'
-
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
-    testCompile 'junit:junit:4.11'
-
-}
-
-buildscript {
-    repositories {
-        mavenLocal()
-        jcenter()
-        mavenCentral()
-    }
-
-    dependencies {
         classpath 'org.jooq:jooq-codegen:3.11.3'
         classpath 'mysql:mysql-connector-java:8.0.11'
-        classpath 'gradle.plugin.org.liang:executable-jar-plugin:0.1.9'
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.2.RELEASE"
     }
+}
+
+plugins {
+    id 'java'
+    id 'net.ltgt.apt' version '0.10'
+    id "org.springframework.boot" version "2.1.2.RELEASE"
+    //apply plugin: 'io.spring.dependency-management'
+}
+
+group 'com'
+version '2.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    annotationProcessor("org.projectlombok:lombok:1.18.4")
+    compileOnly("org.projectlombok:lombok:1.18.4")
+    //apt 'org.projectlombok:lombok:1.18.4'
+    
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.8.0-beta2'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.8.0-beta2'
+    
+    //compile group: 'org.projectlombok', name: 'lombok-maven-plugin', version: '1.18.4'
+    runtime group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    compile group: 'org.jooq', name: 'jooq', version: '3.11.3'
+    //
+    compile group: 'org.jooq', name: 'jooq-codegen-maven', version: '3.11.3'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+    compile group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: '2.1.2.RELEASE', ext: 'pom'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-core', version: '5.1.4.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.1.2.RELEASE'
+    //compile group: 'org.springframework', name: 'org.springframework.transaction', version: '3.2.2.RELEASE'
+    compile group: 'org.springframework', name: 'spring-tx', version: '5.1.4.RELEASE'
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
 }
 
 def writer = new StringWriter()
-def xml = new MarkupBuilder(writer)
-        .configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.11.0.xsd') {
+def xml = new groovy.xml.MarkupBuilder(writer).configuration('xmlns': 'http://www.jooq.org/xsd/jooq-codegen-3.11.0.xsd') {
     jdbc() {
         driver('com.mysql.cj.jdbc.Driver')
-        url('jdbc:mysql://localhost:3306/thhkpr?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC')
+        url('jdbc:mysql://localhost:3306/thhkpr?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&useSSL=false')
         user('root')
         password('root')
         //schema ('thhkpr')
     }
     generator() {
-
         name  'org.jooq.codegen.DefaultGenerator'
         strategy {
             name  'org.jooq.codegen.DefaultGeneratorStrategy'
         }
-
         database() {
             inputSchema  'thhkpr'
         }
-
         // Watch out for this caveat when using MarkupBuilder with "reserved names"
         // - https://github.com/jOOQ/jOOQ/issues/4797
         // - http://stackoverflow.com/a/11389034/521799
@@ -106,7 +82,6 @@ def xml = new MarkupBuilder(writer)
             //jpaVersion  '2.1'
             //validationAnnotations true
             //springAnnotations true
-
         }
         target() {
             packageName('com.thhkpr.databases')
@@ -115,36 +90,6 @@ def xml = new MarkupBuilder(writer)
     }
 }
 
-
 // Run the code generator
 // ----------------------
-GenerationTool.generate(
-        JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.meta.jaxb.Configuration.class)
-)
-
-///
-task webpack(type: NodeTask, dependsOn: 'npmInstall') {
-    def osName = System.getProperty("os.name").toLowerCase();
-    if (osName.contains("windows")) {
-        script = project.file('node_modules/webpack/bin/webpack.js')
-    } else {
-        script = project.file('node_modules/.bin/webpack')
-    }
-}
-
-//create a single Jar with all dependencies
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Implementation-Title': 'Gradle Jar File Example',
-                'Implementation-Version': version,
-                'Main-Class': 'com.thhkpr.SpringThhkprApplication'
-    }
-    baseName = project.name + '-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
-
-
-processResources.dependsOn 'webpack'
-
-clean.delete << file('node_modules')
+org.jooq.codegen.GenerationTool.generate(javax.xml.bind.JAXB.unmarshal(new StringReader(writer.toString()), org.jooq.meta.jaxb.Configuration.class))
